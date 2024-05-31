@@ -61,9 +61,9 @@ namespace ver3
             }
 
             // More specific validation (add checks as needed)
-            if (playerName.Length > 50)
+            if (playerName.Length > 10)
             {
-                MessageBox.Show("Name cannot exceed 50 characters.");
+                MessageBox.Show("Name cannot exceed 10 characters.");
                 return;
             }
 

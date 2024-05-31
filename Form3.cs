@@ -8,45 +8,84 @@ namespace ver3
     {
         private SoundPlayer backgroundMusicPlayer;
         private bool isMuted;
+        private int currentDifficultyIndex;
+        private readonly int[] gridSizes = { 5, 4, 3 };
+        private readonly string[] difficultyLabels = { "Easy", "Medium", "Hard" };
 
         public MenuForm(SoundPlayer backgroundMusicPlayer, bool isMuted)
         {
             InitializeComponent();
             this.backgroundMusicPlayer = backgroundMusicPlayer;
             this.isMuted = isMuted;
+            this.currentDifficultyIndex = 0; // Start with Easy difficulty
 
-            // Add difficulty buttons to menu form if needed
-            Button btnEasy = new Button() { Text = "Easy (5x5)" };
-            btnEasy.Click += (s, e) => ChangeDifficulty(5);
+            InitializeDifficultyControl();
+            InitializeMuteControl();
+        }
 
-            Button btnMedium = new Button() { Text = "Medium (4x4)" };
-            btnMedium.Click += (s, e) => ChangeDifficulty(4);
+        private void InitializeDifficultyControl()
+        {
+            this.Difficulty.Image = Properties.Resources.easy; // Initial image
+            this.Difficulty.Click += PicDifficulty_Click;
+            this.label1.Text = difficultyLabels[currentDifficultyIndex]; // Initial label
+        }
 
-            Button btnHard = new Button() { Text = "Hard (3x3)" };
-            btnHard.Click += (s, e) => ChangeDifficulty(3);
+        private void InitializeMuteControl()
+        {
+            this.picMuteUnmute.Image = isMuted ? Properties.Resources.mute : Properties.Resources.unmute; // Initial image
+            this.lblMuteUnmute.Text = isMuted ? "Unmute Sound" : "Mute Sound"; // Initial label
+        }
 
-            this.Controls.Add(btnEasy);
-            this.Controls.Add(btnMedium);
-            this.Controls.Add(btnHard);
+        private void PicDifficulty_Click(object sender, EventArgs e)
+        {
+            // Cycle through difficulty levels
+            currentDifficultyIndex = (currentDifficultyIndex + 1) % gridSizes.Length;
+
+            // Update PictureBox image and label text based on the new difficulty
+            switch (currentDifficultyIndex)
+            {
+                case 0:
+                    this.Difficulty.Image = Properties.Resources.easy;
+                    break;
+                case 1:
+                    this.Difficulty.Image = Properties.Resources.medium;
+                    break;
+                case 2:
+                    this.Difficulty.Image = Properties.Resources.hard;
+                    break;
+            }
+
+            // Update the label text
+            this.label1.Text = difficultyLabels[currentDifficultyIndex];
+
+            // Change the difficulty in the main form
+            ChangeDifficulty(gridSizes[currentDifficultyIndex]);
         }
 
         private void ChangeDifficulty(int gridSize)
         {
-            ((Form1)this.Owner).ChangeDifficulty(gridSize);
-            this.Close();
+            if (this.Owner is Form1 mainForm)
+            {
+                mainForm.ChangeDifficulty(gridSize);
+            }
+            else
+            {
+                // Handle the case where the Owner is not set or not of type Form1
+                MessageBox.Show("Main form is not set as owner.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void UpdateMuteIcon()
         {
             if (isMuted)
             {
-                picMuteUnmute.Image = Properties.Resources.unmute; // Set to unmute icon
-                lblMuteUnmute.Text = "Unmute Sound";
+                this.picMuteUnmute.Image = Properties.Resources.unmute; // Set to unmute icon
+                this.lblMuteUnmute.Text = "Unmute Sound";
             }
             else
             {
-                picMuteUnmute.Image = Properties.Resources.mute; // Set to mute icon
-                lblMuteUnmute.Text = "Mute Sound";
+                this.picMuteUnmute.Image = Properties.Resources.mute; // Set to mute icon
+                this.lblMuteUnmute.Text = "Mute Sound";
             }
         }
 
@@ -63,6 +102,10 @@ namespace ver3
                 isMuted = true;
             }
             UpdateMuteIcon();
+        }
+
+        private void MenuForm_Load(object sender, EventArgs e)
+        {
         }
     }
 }

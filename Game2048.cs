@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace ver3
 {
-    public class Game2048:Panel
+    public class Game2048 : Panel
     {
         private int previousScore = -1;
         private int soLanUndo = 5;
@@ -23,7 +23,6 @@ namespace ver3
         public int score { get; private set; }
         public int bestScore { get; private set; }
         public bool isEndGame { get; set; }
-
 
         public event EventHandler TangDiemEvent;
         public event EventHandler EndGameEvent;
@@ -60,11 +59,49 @@ namespace ver3
             ready = true;
 
             this.Location = position;
-            this.Width = 450;  // Adjust size based on grid
-            this.Height = 450; // Adjust size based on grid
-            this.BackgroundImage = Image.FromFile(@"C:\Users\Veeeeenum\Desktop\2048-main\images\BackGround.png");
+            this.Width = gridSize * 100 + 50;  // Adjust size based on grid
+            this.Height = gridSize * 100 + 50; // Adjust size based on grid
+            SetBackgroundImage(gridSize);
         }
 
+      private void SetBackgroundImage(int gridSize)
+{
+    string imagePath = gridSize switch
+    {
+        5 => @"C:\Users\Veeeeenum\Desktop\2048-main\images\BackGround-easy.png",
+        4 => @"C:\Users\Veeeeenum\Desktop\2048-main\images\BackGround-medium.png",
+        3 => @"C:\Users\Veeeeenum\Desktop\2048-main\images\BackGround-hard.png",
+        _ => @"C:\Users\Veeeeenum\Desktop\2048-main\images\BackGround-default.png"
+    };
+
+    Image originalImage = Image.FromFile(imagePath);
+
+    // Calculate the desired width and height for the background image
+    int desiredWidth = this.Width; // Use panel's width
+    int desiredHeight = this.Height; // Use panel's height
+
+    // Create a new Bitmap with the desired dimensions
+    Bitmap resizedImage = new Bitmap(desiredWidth, desiredHeight);
+
+    // Draw the original image onto the resized image with proper scaling
+    using (Graphics g = Graphics.FromImage(resizedImage))
+    {
+        g.DrawImage(originalImage, 0, 0, desiredWidth, desiredHeight); // Draw the image to fill the entire resized image
+    }
+
+    // Set the resized image as the background image of the panel
+    this.BackgroundImage = resizedImage;
+    this.BackgroundImageLayout = ImageLayout.Stretch; // Stretch the image to fill the panel
+}
+
+        public void UpdateGridSize(int newSize)
+        {
+            this.width = newSize;
+            this.height = newSize;
+            this.Width = newSize * 100 + 50;
+            this.Height = newSize * 100 + 50;
+            SetBackgroundImage(newSize);
+        }
         public void Recovery(Square[,] arrSquare, Square[,] previousArr, int bestScore, int score, int soLanUndo, bool readyToUndo, int previousScore)
         {
             this.arrSquare = arrSquare;
@@ -422,7 +459,7 @@ namespace ver3
         /// <summary>
         /// Lay ra thong tin hien tai cua game de luu
         /// </summary>
-        /// <returns></returns>
+        /// <returns></returns>3
         public GameInfo Get_GameInfo()
         {
             GameInfo inf = new GameInfo(this.bestScore, this.score, this.previousScore, soLanUndo, readyToUndo, arrSquare, previousArr, isEndGame);

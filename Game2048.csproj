@@ -8,6 +8,7 @@
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ver3</RootNamespace>
+    <LangVersion>8.0</LangVersion>
     <AssemblyName>ver3</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -195,6 +196,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\menu icon.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BackGround-Easy.png" />
+    <Content Include="Resources\easy.png" />
+    <Content Include="Resources\hard.png" />
+    <Content Include="Resources\medium.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

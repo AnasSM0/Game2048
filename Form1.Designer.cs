@@ -28,20 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.pnlControl = new System.Windows.Forms.Panel();
+            this.picReplay = new System.Windows.Forms.PictureBox();
+            this.picUndo = new System.Windows.Forms.PictureBox();
             this.lblScore = new System.Windows.Forms.Label();
             this.lblBest = new System.Windows.Forms.Label();
+            this.lblMenu = new System.Windows.Forms.PictureBox();
             this.pnlEndGame = new System.Windows.Forms.Panel();
             this.btnTryAgain = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.picReplay = new System.Windows.Forms.PictureBox();
-            this.picUndo = new System.Windows.Forms.PictureBox();
-            this.lblMenu = new System.Windows.Forms.PictureBox();
             this.pnlControl.SuspendLayout();
-            this.pnlEndGame.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picReplay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picUndo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblMenu)).BeginInit();
+            this.pnlEndGame.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlControl
@@ -54,67 +55,8 @@
             this.pnlControl.Controls.Add(this.lblMenu);
             this.pnlControl.Location = new System.Drawing.Point(1, 2);
             this.pnlControl.Name = "pnlControl";
-            this.pnlControl.Size = new System.Drawing.Size(450, 100);
+            this.pnlControl.Size = new System.Drawing.Size(567, 100);
             this.pnlControl.TabIndex = 0;
-            // 
-            // lblScore
-            // 
-            this.lblScore.BackColor = System.Drawing.SystemColors.Control;
-            this.lblScore.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblScore.ForeColor = System.Drawing.Color.White;
-            this.lblScore.Location = new System.Drawing.Point(172, 13);
-            this.lblScore.Name = "lblScore";
-            this.lblScore.Size = new System.Drawing.Size(133, 74);
-            this.lblScore.TabIndex = 0;
-            this.lblScore.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblScore.Click += new System.EventHandler(this.lblScore_Click);
-            // 
-            // lblBest
-            // 
-            this.lblBest.BackColor = System.Drawing.SystemColors.Control;
-            this.lblBest.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lblBest.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBest.ForeColor = System.Drawing.Color.White;
-            this.lblBest.Location = new System.Drawing.Point(311, 13);
-            this.lblBest.Name = "lblBest";
-            this.lblBest.Size = new System.Drawing.Size(133, 74);
-            this.lblBest.TabIndex = 0;
-            this.lblBest.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblBest.Click += new System.EventHandler(this.lblBest_Click);
-            // 
-            // pnlEndGame
-            // 
-            this.pnlEndGame.Controls.Add(this.btnTryAgain);
-            this.pnlEndGame.Controls.Add(this.label1);
-            this.pnlEndGame.Location = new System.Drawing.Point(123, 262);
-            this.pnlEndGame.Name = "pnlEndGame";
-            this.pnlEndGame.Size = new System.Drawing.Size(200, 100);
-            this.pnlEndGame.TabIndex = 1;
-            this.pnlEndGame.Visible = false;
-            // 
-            // btnTryAgain
-            // 
-            this.btnTryAgain.BackColor = System.Drawing.SystemColors.ButtonShadow;
-            this.btnTryAgain.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTryAgain.Location = new System.Drawing.Point(39, 60);
-            this.btnTryAgain.Name = "btnTryAgain";
-            this.btnTryAgain.Size = new System.Drawing.Size(123, 37);
-            this.btnTryAgain.TabIndex = 1;
-            this.btnTryAgain.Text = "Try again";
-            this.btnTryAgain.UseVisualStyleBackColor = false;
-            this.btnTryAgain.Click += new System.EventHandler(this.btnTryAgain_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.Gray;
-            this.label1.Location = new System.Drawing.Point(7, 12);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(186, 31);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "GAME OVER";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // picReplay
             // 
@@ -140,6 +82,31 @@
             this.picUndo.TabStop = false;
             this.picUndo.Click += new System.EventHandler(this.picUndo_Click);
             // 
+            // lblScore
+            // 
+            this.lblScore.BackColor = System.Drawing.SystemColors.Control;
+            this.lblScore.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblScore.ForeColor = System.Drawing.Color.White;
+            this.lblScore.Location = new System.Drawing.Point(166, 12);
+            this.lblScore.Name = "lblScore";
+            this.lblScore.Size = new System.Drawing.Size(200, 74);
+            this.lblScore.TabIndex = 0;
+            this.lblScore.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblScore.Click += new System.EventHandler(this.lblScore_Click);
+            // 
+            // lblBest
+            // 
+            this.lblBest.BackColor = System.Drawing.SystemColors.Control;
+            this.lblBest.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lblBest.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBest.ForeColor = System.Drawing.Color.White;
+            this.lblBest.Location = new System.Drawing.Point(383, 12);
+            this.lblBest.Name = "lblBest";
+            this.lblBest.Size = new System.Drawing.Size(158, 74);
+            this.lblBest.TabIndex = 0;
+            this.lblBest.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblBest.Click += new System.EventHandler(this.lblBest_Click);
+            // 
             // lblMenu
             // 
             this.lblMenu.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -152,16 +119,52 @@
             this.lblMenu.TabStop = false;
             this.lblMenu.Click += new System.EventHandler(this.lblMenu_Click);
             // 
+            // pnlEndGame
+            // 
+            this.pnlEndGame.Controls.Add(this.btnTryAgain);
+            this.pnlEndGame.Controls.Add(this.label1);
+            this.pnlEndGame.Location = new System.Drawing.Point(160, 283);
+            this.pnlEndGame.Name = "pnlEndGame";
+            this.pnlEndGame.Size = new System.Drawing.Size(200, 100);
+            this.pnlEndGame.TabIndex = 1;
+            this.pnlEndGame.Visible = false;
+            this.pnlEndGame.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlEndGame_Paint);
+            // 
+            // btnTryAgain
+            // 
+            this.btnTryAgain.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            this.btnTryAgain.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTryAgain.Location = new System.Drawing.Point(39, 60);
+            this.btnTryAgain.Name = "btnTryAgain";
+            this.btnTryAgain.Size = new System.Drawing.Size(123, 37);
+            this.btnTryAgain.TabIndex = 1;
+            this.btnTryAgain.Text = "Try again";
+            this.btnTryAgain.UseVisualStyleBackColor = false;
+            this.btnTryAgain.Click += new System.EventHandler(this.btnTryAgain_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.Gray;
+            this.label1.Location = new System.Drawing.Point(7, 12);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(186, 31);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "GAME OVER";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(451, 549);
+            this.ClientSize = new System.Drawing.Size(554, 646);
             this.Controls.Add(this.pnlEndGame);
             this.Controls.Add(this.pnlControl);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(550, 700);
+            this.MaximumSize = new System.Drawing.Size(700, 700);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "2048";
@@ -170,11 +173,11 @@
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.pnlControl.ResumeLayout(false);
             this.pnlControl.PerformLayout();
-            this.pnlEndGame.ResumeLayout(false);
-            this.pnlEndGame.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picReplay)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picUndo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblMenu)).EndInit();
+            this.pnlEndGame.ResumeLayout(false);
+            this.pnlEndGame.PerformLayout();
             this.ResumeLayout(false);
 
         }

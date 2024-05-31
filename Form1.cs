@@ -14,13 +14,13 @@ namespace ver3
         private SoundPlayer backgroundMusicPlayer;
         private bool isMuted = false;
         private ContextMenuStrip contextMenu;
-
+        private const int BackgroundSize = 550;
         public Form1(string playerName)
         {
             InitializeComponent();
             this.playerName = playerName;
 
-            InitializeGame(4); // Default to 4x4 grid
+            InitializeGame(5); // Default to 4x4 grid
 
             // Initialize and play background music
             InitializeBackgroundMusic();
@@ -54,6 +54,9 @@ namespace ver3
             game.TangDiemEvent += Game_TangDiemEvent;
             Setting.SetDoubleBuffered(game);
 
+            // Adjust game size and location based on grid size
+            //AdjustGameSize(gridSize);
+
             this.Controls.Add(game);
             game.Show();
         }
@@ -61,6 +64,7 @@ namespace ver3
         private void InitializeContextMenu()
         {
             contextMenu = new ContextMenuStrip();
+
             ToolStripMenuItem muteMenuItem = new ToolStripMenuItem("Mute", null, MuteMenuItem_Click);
             contextMenu.Items.Add(muteMenuItem);
 
@@ -76,18 +80,30 @@ namespace ver3
             lblMenu.ContextMenuStrip = contextMenu;
         }
 
+        private void OpenMenuForm()
+        {
+            using (var menuForm = new MenuForm(backgroundMusicPlayer, isMuted))
+            {
+                menuForm.Owner = this; // Set the Owner property
+                menuForm.ShowDialog();
+            }
+        }
+
+        private void AdjustGameSize(int gridSize)
+        {
+            int cellSize = (BackgroundSize - (gridSize + 1) * 10) / gridSize; // calculate cell size based on grid size
+            //game.SetGridSize(gridSize, cellSize, 10); // assuming you have a method to set grid size, cell size, and margin in Game2048
+            game.Size = new Size(BackgroundSize, BackgroundSize);
+            game.Location = new Point(
+                (this.ClientSize.Width - game.Width) / 2,
+                (this.ClientSize.Height - game.Height) / 2 + 50 // Adjust Y to account for other UI elements
+            );
+        }
+
+
         public void ChangeDifficulty(int gridSize)
         {
             InitializeGame(gridSize);
-
-            // Adjust form size based on grid size
-            this.Width = 500; // Adjust as needed
-            this.Height = 600; // Adjust as needed
-
-            int score = game.score;
-            lblScore.Text = $"{playerName}\r\n{score}";
-            int bestScore = game.bestScore;
-            lblBest.Text = $"BEST\r\n{bestScore}";
         }
 
         private void InitializeBackgroundMusic()
@@ -111,7 +127,6 @@ namespace ver3
             }
             isMuted = !isMuted;
         }
-
 
         private void Game_EndGameEvent(object sender, EventArgs e)
         {
@@ -181,8 +196,11 @@ namespace ver3
 
         private void ShowMenu()
         {
-            MenuForm menuForm = new MenuForm(backgroundMusicPlayer, isMuted);
-            menuForm.ShowDialog();
+            using (MenuForm menuForm = new MenuForm(backgroundMusicPlayer, isMuted))
+            {
+                menuForm.Owner = this; // Set the Owner property to the current instance of Form1
+                menuForm.ShowDialog();
+            }
         }
 
         // Method to save the player's score when the game ends
@@ -245,7 +263,9 @@ namespace ver3
                 Form leaderboardForm = new Form
                 {
                     Text = "Leaderboard",
-                    Size = new Size(300, 400)
+                    Size = new Size(400, 400), // Set the size
+                    FormBorderStyle = FormBorderStyle.FixedDialog, // Make the form non-resizable
+                    StartPosition = FormStartPosition.CenterScreen // Center the form on the screen
                 };
 
                 DataGridView dataGridView = new DataGridView
@@ -256,7 +276,9 @@ namespace ver3
                     AllowUserToAddRows = false,
                     AllowUserToDeleteRows = false,
                     AllowUserToResizeColumns = false,
-                    AllowUserToResizeRows = false
+                    AllowUserToResizeRows = false,
+                    AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill, // Adjust columns to fill the width of the form
+                    ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
                 };
 
                 leaderboardForm.Controls.Add(dataGridView);
@@ -266,8 +288,9 @@ namespace ver3
 
         private void lbl2048_Click(object sender, EventArgs e) { }
 
+        private void textBox1_TextChanged(object sender, EventArgs e) { }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void pnlEndGame_Paint(object sender, PaintEventArgs e)
         {
 
         }

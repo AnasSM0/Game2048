@@ -35,6 +35,7 @@ namespace ver3
             lblFigure = new Label();           
             lblFigure.Text = value.ToString();
             lblFigure.TextAlign = ContentAlignment.MiddleCenter;
+
             //
 
             if (createAnimation)
